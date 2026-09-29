@@ -17,7 +17,7 @@ import {
   X,
 } from 'lucide-react'
 
-const downloadUrl = '/downloads/steply.apk'
+const downloadUrl = '/downloads/app-release.apk'
 
 const features = [
   {
@@ -78,7 +78,7 @@ function DownloadLink({ secondary = false, compact = false }) {
     <a
       className={`download-link ${secondary ? 'download-link-secondary' : ''} ${compact ? 'download-link-compact' : ''}`}
       href={downloadUrl}
-      download="steply.apk"
+      download="app-release.apk"
     >
       <ArrowDownToLine aria-hidden="true" size={compact ? 17 : 19} />
       <span>{compact ? 'Tải APK' : 'Tải Steply miễn phí'}</span>
