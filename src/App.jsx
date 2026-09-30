@@ -3,17 +3,22 @@ import {
   Activity,
   ArrowDownToLine,
   ArrowRight,
+  CalendarCheck2,
   Check,
   ChevronDown,
+  ClipboardCheck,
   Footprints,
   Gift,
   HeartPulse,
   Menu,
   RefreshCw,
+  ShoppingBag,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  UserRound,
   Wallet,
+  WalletCards,
   X,
 } from 'lucide-react'
 
@@ -23,22 +28,43 @@ const features = [
   {
     icon: Footprints,
     number: '01',
-    title: 'Mỗi bước đều được ghi nhận',
-    copy: 'Theo dõi bước chân, quãng đường và thời gian vận động trong ngày trên một màn hình rõ ràng.',
+    title: 'Theo dõi từng bước chân',
+    copy: 'Xem số bước, quãng đường, thời gian và calories ước tính trong ngày; bắt đầu hoặc kết thúc phiên đi bộ ngay trong app.',
     tone: 'mint',
   },
   {
-    icon: Sparkles,
+    icon: RefreshCw,
     number: '02',
-    title: 'Mục tiêu nhỏ, động lực lớn',
-    copy: 'Chia mục tiêu thành những cột mốc dễ chạm tới. Duy trì nhịp vận động theo cách của riêng bạn.',
+    title: 'Tiếp tục vận động, kể cả khi mất mạng',
+    copy: 'Phiên đi bộ có thể tiếp tục chạy khi app ở nền trên thiết bị được hỗ trợ; dữ liệu lưu chờ sẽ đồng bộ lại khi có mạng.',
     tone: 'peach',
   },
   {
-    icon: Gift,
+    icon: CalendarCheck2,
     number: '03',
-    title: 'Thêm niềm vui vào hành trình',
-    copy: 'Khám phá nhiệm vụ, điểm thưởng và hoạt động mỗi ngày ngay trong ứng dụng Steply.',
+    title: 'Nhiệm vụ và điểm danh mỗi ngày',
+    copy: 'Khám phá hoạt động đang mở, điểm danh và hoàn thành nhiệm vụ để theo dõi cơ hội nhận thưởng trong ứng dụng.',
+    tone: 'blue',
+  },
+  {
+    icon: WalletCards,
+    number: '04',
+    title: 'Quản lý thưởng trong ví',
+    copy: 'Theo dõi số dư, lịch sử giao dịch và gửi yêu cầu rút thưởng trực tiếp từ ví Steply.',
+    tone: 'mint',
+  },
+  {
+    icon: ShoppingBag,
+    number: '05',
+    title: 'Khám phá cửa hàng trong app',
+    copy: 'Xem khu vực sản phẩm và quản lý lựa chọn trong giỏ hàng ngay trên điện thoại.',
+    tone: 'peach',
+  },
+  {
+    icon: UserRound,
+    number: '06',
+    title: 'Tài khoản theo cách của bạn',
+    copy: 'Cập nhật thông tin cá nhân, ảnh đại diện và quản lý tài khoản ngay trong ứng dụng.',
     tone: 'blue',
   },
 ]
@@ -46,13 +72,13 @@ const features = [
 const steps = [
   ['01', 'Kết nối chuyển động', 'Cho phép Steply ghi nhận dữ liệu bước chân trên điện thoại của bạn.'],
   ['02', 'Đi bộ theo nhịp riêng', 'Bắt đầu phiên vận động, theo dõi tiến trình và giữ thói quen mỗi ngày.'],
-  ['03', 'Mở khóa cột mốc', 'Hoàn thành mục tiêu, khám phá nhiệm vụ và xem hoạt động trong ví Steply.'],
+  ['03', 'Khám phá nhiệm vụ và thưởng', 'Điểm danh, tham gia hoạt động đang mở và theo dõi số dư, giao dịch trong ví.'],
 ]
 
 const questions = [
   {
     question: 'Steply hiện hỗ trợ thiết bị nào?',
-    answer: 'Landing page này giới thiệu bản ứng dụng Android. Nút tải APK sẽ hoạt động khi bản cài đặt được đặt trong thư mục downloads của website.',
+    answer: 'Steply hiện hỗ trợ Android. Phiên bản iOS chưa được hỗ trợ.',
   },
   {
     question: 'Steply ghi nhận hoạt động như thế nào?',
@@ -61,6 +87,10 @@ const questions = [
   {
     question: 'Tôi có cần kết nối mạng liên tục không?',
     answer: 'Phiên vận động có thể được lưu tạm khi mất kết nối và đồng bộ lại khi mạng khả dụng.',
+  },
+  {
+    question: 'Tôi có thể nhận thưởng hoặc rút tiền như thế nào?',
+    answer: 'Bạn có thể xem nhiệm vụ, điểm danh và ưu đãi đang có trong app, sau đó theo dõi số dư và gửi yêu cầu rút trong ví nếu đủ điều kiện. Phần thưởng tùy chương trình; yêu cầu rút có thể cần xét duyệt và Steply không cam kết thu nhập cố định.',
   },
 ]
 
@@ -151,6 +181,7 @@ function App() {
           <Brand />
           <nav className={`desktop-nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Điều hướng chính">
             <a href="#features" onClick={closeMenu}>Tính năng</a>
+            <a href="#rewards" onClick={closeMenu}>Cơ hội nhận thưởng</a>
             <a href="#how-it-works" onClick={closeMenu}>Cách hoạt động</a>
             <a href="#faq" onClick={closeMenu}>Câu hỏi thường gặp</a>
           </nav>
@@ -170,13 +201,13 @@ function App() {
             <div className="hero-copy">
               <div className="eyebrow"><span className="eyebrow-mark"><Footprints size={15} /></span> ỨNG DỤNG SỐNG NĂNG ĐỘNG</div>
               <h1>Mỗi ngày<br />tiến thêm <span>một bước.</span></h1>
-              <p className="hero-description">Bước nhỏ hôm nay, thói quen khỏe mạnh ngày mai. Theo dõi chuyển động, chạm mục tiêu và tìm thêm niềm vui cùng Steply.</p>
+              <p className="hero-description">Bước nhỏ hôm nay, thói quen khỏe mạnh ngày mai. Theo dõi chuyển động, tham gia nhiệm vụ và khám phá cơ hội nhận thưởng cùng Steply.</p>
               <div className="hero-actions"><DownloadLink /><a className="text-link" href="#features">Khám phá ứng dụng <ArrowRight size={16} /></a></div>
               <div className="hero-proof"><div className="proof-icons"><span><Footprints size={14} /></span><span><Activity size={14} /></span><span><Gift size={14} /></span></div><p><strong>Vận động theo cách của bạn</strong><small>Theo dõi · Mục tiêu · Phần thưởng</small></p></div>
             </div>
             <AppPreview />
           </div>
-          <div className="hero-bottom page-width"><span>ĐƯỢC THIẾT KẾ CHO NHỮNG BƯỚC ĐI MỖI NGÀY</span><div><span><Check size={14} />Theo dõi bước chân</span><span><Check size={14} />Phiên vận động</span><span><Check size={14} />Mục tiêu cá nhân</span></div></div>
+          <div className="hero-bottom page-width"><span>ĐƯỢC THIẾT KẾ CHO NHỮNG BƯỚC ĐI MỖI NGÀY</span><div><span><Check size={14} />Theo dõi bước chân</span><span><Check size={14} />Nhiệm vụ mỗi ngày</span><span><Check size={14} />Ví thưởng</span></div></div>
         </section>
 
         <section className="intro-strip">
@@ -185,14 +216,31 @@ function App() {
 
         <section id="features" className="features-section section-pad">
           <div className="page-width">
-            <div className="section-heading"><div><span className="eyebrow-label">ĐIỀU LÀM NÊN STEPLY</span><h2>Hành trình khỏe hơn,<br /><span>theo cách của bạn.</span></h2></div><p>Những công cụ cần thiết để bạn nhìn thấy tiến trình và giữ nhịp vận động mỗi ngày.</p></div>
+            <div className="section-heading"><div><span className="eyebrow-label">ĐIỀU LÀM NÊN STEPLY</span><h2>Hành trình khỏe hơn,<br /><span>theo cách của bạn.</span></h2></div><p>Từ theo dõi vận động đến nhiệm vụ, ví thưởng và quản lý tài khoản: những trải nghiệm đang có trong ứng dụng Android.</p></div>
             <div className="feature-grid">
               {features.map(({ icon: Icon, number, title, copy, tone }) => (
                 <article className={`feature-item feature-${tone}`} key={number}>
-                  <div className="feature-top"><span className="feature-icon"><Icon size={22} strokeWidth={1.8} /></span><span className="feature-number">{number} / 03</span></div>
+                  <div className="feature-top"><span className="feature-icon"><Icon size={22} strokeWidth={1.8} /></span><span className="feature-number">{number} / 06</span></div>
                   <h3>{title}</h3><p>{copy}</p><a href="#how-it-works" aria-label={`Tìm hiểu ${title}`}><ArrowRight size={19} /></a>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="rewards" className="earn-section section-pad">
+          <div className="page-width earn-grid">
+            <div className="earn-copy">
+              <span className="eyebrow-label"><Sparkles size={14} /> ĐI BỘ, THAM GIA, NHẬN THƯỞNG</span>
+              <h2>Biến từng bước chân<br /><span>thành động lực mới.</span></h2>
+              <p>Steply kết nối thói quen vận động với nhiệm vụ, điểm danh và ưu đãi trong ứng dụng. Hoàn thành hoạt động phù hợp, rồi xem phần thưởng và giao dịch ngay trong ví.</p>
+              <a className="earn-link" href="#download">Khám phá Steply <ArrowRight size={16} /></a>
+              <p className="earn-disclaimer">Nhiệm vụ, mức thưởng và điều kiện nhận có thể thay đổi theo chương trình. Yêu cầu rút thưởng được xử lý theo điều kiện và quy trình xét duyệt trong app; không cam kết thu nhập cố định.</p>
+            </div>
+            <div className="earn-flow" aria-label="Cách theo dõi nhiệm vụ và phần thưởng">
+              <div className="earn-step"><span className="earn-step-icon"><Footprints size={20} /></span><span className="earn-step-number">01</span><div><h3>Duy trì nhịp đi bộ</h3><p>Ghi nhận bước chân và phiên vận động hằng ngày.</p></div></div>
+              <div className="earn-step"><span className="earn-step-icon earn-step-coral"><ClipboardCheck size={20} /></span><span className="earn-step-number">02</span><div><h3>Tham gia hoạt động đang mở</h3><p>Điểm danh, hoàn thành nhiệm vụ hoặc ưu đãi khả dụng.</p></div></div>
+              <div className="earn-step"><span className="earn-step-icon earn-step-blue"><Wallet size={20} /></span><span className="earn-step-number">03</span><div><h3>Theo dõi trong ví</h3><p>Xem số dư, lịch sử giao dịch và gửi yêu cầu rút nếu đủ điều kiện.</p></div></div>
             </div>
           </div>
         </section>
